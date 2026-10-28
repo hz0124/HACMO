@@ -1,0 +1,17 @@
+# Local TP2 generated/archived artifacts
+legacy/
+codex_log/
+explore/
+outputs/
+log/
+traces/
+inputs/
+plots/
+
+# Python/runtime cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local editor/session marker
+.codex

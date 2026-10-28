@@ -1,0 +1,30 @@
+{
+  "mode_used": "unaware",
+  "probe_note": "",
+  "rows": 20,
+  "cols": 18,
+  "avg_remote_hops": 12.666666666666666,
+  "hops_used_for_fit": 1.0,
+  "calib_hops_mode": "neighbor",
+  "noc_bw_tbps": 5.0,
+  "gamma_fit": 1.3044203594054058,
+  "gamma_through_origin": 1.3044203594054058,
+  "beta_fit_us": 0.46976923076923044,
+  "records": [
+    {
+      "remote_bytes": 1048576,
+      "wall_us": 1.213,
+      "x_base_us": 0.20971520000000002
+    },
+    {
+      "remote_bytes": 4194304,
+      "wall_us": 1.799,
+      "x_base_us": 0.8388608000000001
+    },
+    {
+      "remote_bytes": 16777216,
+      "wall_us": 4.142,
+      "x_base_us": 3.3554432000000003
+    }
+  ]
+}

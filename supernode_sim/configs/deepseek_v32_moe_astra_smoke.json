@@ -1,0 +1,45 @@
+{
+  "backend": "astra",
+  "hardware": {
+    "array_rows": 20,
+    "array_cols": 20,
+    "hbm_peak_tbps": 4.8,
+    "noc_bw_tbps": 5.0,
+    "compute_peak_tflops": 2250.0,
+    "total_sram_mb": 440.0
+  },
+  "workload": {
+    "model_name": "DeepSeek-V3.2",
+    "layer_type": "moe",
+    "batch_size": 16,
+    "decode_len": 4,
+    "hidden_size": 7168
+  },
+  "moe": {
+    "num_experts": 256,
+    "topk": 8,
+    "num_requests": 16,
+    "window_size": 4,
+    "hidden_size": 7168,
+    "bytes_per_hidden_elem": 2,
+    "expert_compute_us_per_token": 0.1,
+    "attention_us_per_die": 0.0,
+    "mapping_method": "edge_aware",
+    "real_freq_json": "",
+    "locality_factor": 5.0,
+    "locality_wafer_shift": 4,
+    "seed": 42
+  },
+  "supernode": {
+    "num_wafers": 16,
+    "dies_per_wafer": 16,
+    "network_config": "hacmo/moe/configs/network/hierarchical_16w_4x4_mesh_rail_500.yaml",
+    "system_config": "supernode_sim/configs/astra/system/p2p_only.json",
+    "remote_memory_config": "supernode_sim/configs/astra/remote_memory/no_memory_expansion.json",
+    "astra_sim_dir": "astra-sim",
+    "astra_network_backend": "congestion_aware",
+    "output_root": "/tmp/supernode_sim/deepseek_v32_moe_astra_smoke",
+    "run_astra": true,
+    "keep_traces": true
+  }
+}

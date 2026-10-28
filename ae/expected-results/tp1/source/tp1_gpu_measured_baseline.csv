@@ -1,0 +1,7 @@
+context,batch,G_us,gpu_model,measurement_scope,measurement_s_kv,topk,s_q,context_policy,target_context_validation_delta_pct
+8k,16,71.0,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.7913593256059013
+8k,32,91.2,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.7913593256059013
+8k,64,120.7,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.7913593256059013
+16k,16,71.0,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.2644889357218192
+16k,32,91.2,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.2644889357218192
+16k,64,120.7,NVIDIA H200,isolated vLLM FlashMLA sparse-attention kernel,32768,2048,1,reuse direct fixed-topk batch measurement,-1.2644889357218192

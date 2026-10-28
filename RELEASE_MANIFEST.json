@@ -1,0 +1,66 @@
+{
+  "artifact_version": "camera-ready-v1",
+  "base_checkpoint": {
+    "ref": "checkpoint/pre-core-audit-repro-20260721",
+    "commit": "e7eb0027d6e28b206697c98c0aec6765a3f47f44",
+    "scope": "Historical lineage recorded by the archive; the source archive checksum defines this baseline."
+  },
+  "incremental_scope": {
+    "technical_point_1": "Archived trace-driven ASTRA-Sim/Ramulator2 path plus analytical CP2 derivation",
+    "technical_point_2": "Camera-ready per-cell mapping manifest and runtime replay; 943 pinned input requests",
+    "technical_point_3": "Camera-ready lane-level allocation from regenerated TP2 batch-64 pack",
+    "overall": "DeepSeek regeneration with TP1/TP2/TP3 and archived service curves; bundled Qwen/Llama support packs"
+  },
+  "third_party": {
+    "astra_sim": "6d9c0d2093ef7dd84003753f5c28710c22e56e7b",
+    "astra_network_analytical": "ef35968d8f214b72009f5e236fc9bf4d06085b8d",
+    "ramulator2": "be93be78055d922aa1d4d33e15bcc8f2b0c61a9d"
+  },
+  "paper_scope": "Figures 9-12",
+  "repository_preparation": "conference-source-review-20261028",
+  "source_archive": {
+    "doi": "10.5281/zenodo.22658850",
+    "filename": "HACMO-AE-camera-ready-v1-source.tar.gz",
+    "sha256": "db9e3320cd81ec1b4cb72e8fa3d06f8395f0b8266dcf04d74c65299d59fc499a"
+  },
+  "namespace_migration": {
+    "hacmo/Ablation1": "hacmo/attention",
+    "hacmo/Ablation2_new": "hacmo/moe",
+    "hacmo/Ablation3": "hacmo/interconnect"
+  },
+  "reference_data": "ae/expected-results is preserved byte-for-byte from the source archive",
+  "runtime_dependency_archive": {
+    "doi": "10.5281/zenodo.22658850",
+    "filename": "HACMO-AE-camera-ready-v1-linux-x86_64.tar.gz",
+    "sha256": "b4623e2a41ee83d3600fc81ae44175edceb7fcfbc78b3a044e190450dbad9f0b",
+    "source_prefix": "HACMO-AE/build/third_party/ramulator2-src/ext/",
+    "destination": "third_party/ramulator2-deps/"
+  },
+  "dependency_source_commits": {
+    "spdlog": "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36",
+    "yaml-cpp": "0579ae3d976091d7d664aa9d2527e0d0cff25763",
+    "argparse": "997da9255618311d1fcb0135ce86022729d1f1cb"
+  },
+  "recovered_upstream_build_files": [
+    {
+      "path": "third_party/ramulator2-deps/spdlog/cmake/ide.cmake",
+      "commit": "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36",
+      "sha256": "2f7b9b2a4637a699020402908b6cc0de76f159a07f8f8304d7f44ec6be08d2cf"
+    },
+    {
+      "path": "third_party/ramulator2-deps/spdlog/cmake/spdlogCPack.cmake",
+      "commit": "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36",
+      "sha256": "e2482deb8541c34211f7e37d18faad0366b58ea319e9d1f8f2ab8fd1854ebcf6"
+    },
+    {
+      "path": "third_party/ramulator2-deps/spdlog/cmake/utils.cmake",
+      "commit": "ad0e89cbfb4d0c1ce4d097e134eb7be67baebb36",
+      "sha256": "7a3021b708072d1b8a7135c802db509d7198dd2de4f47b877cc7af95750b30a4"
+    },
+    {
+      "path": "third_party/ramulator2-deps/yaml-cpp/test/gtest-1.10.0/googletest/cmake/internal_utils.cmake",
+      "commit": "0579ae3d976091d7d664aa9d2527e0d0cff25763",
+      "sha256": "2e58a0aa938ffa973aa8bd181ee7d3dc6aaa2a88ce5a00fa52f32729f29eb7c3"
+    }
+  ]
+}

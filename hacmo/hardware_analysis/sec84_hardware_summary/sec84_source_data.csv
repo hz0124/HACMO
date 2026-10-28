@@ -1,0 +1,9 @@
+key,value,unit,source,url,note
+fred_wafer_area,70000.0,mm^2,"FRED arXiv:2406.19580v2, Sec. 6.2.2, lines 990-991",https://arxiv.org/pdf/2406.19580,"FRED assumes a standard 300 mm wafer and reports 70,000 mm^2 wafer area."
+fred_npu_io_area,26640.0,mm^2,"FRED arXiv:2406.19580v2, Sec. 6.2.2, lines 1077-1080",https://arxiv.org/pdf/2406.19580,20 NPU chiplets plus 18 I/O controllers.
+fred3_12_l1_switch_area,685.0,mm^2,"FRED arXiv:2406.19580v2, Table 4, lines 1139-1142",https://arxiv.org/pdf/2406.19580,Used as the conservative area proxy for one HACMO side-local crossbar.
+fred_total_fabric_area,25195.0,mm^2,"FRED arXiv:2406.19580v2, Table 4, lines 1141-1148",https://arxiv.org/pdf/2406.19580,Reference only: full FRED switch-fabric area overhead.
+single_cabinet_wafer_limit,4.0,wafers/cabinet,Corrected Section 8.4 hardware-analysis assumption,paper/micro2026-paper928.pdf,The cabinet radix constraint limits one cabinet to four wafers.
+cisco_osfp_800g_low_power,14.0,W/endpoint,"Cisco OSFP 800G Transceiver Modules Data Sheet, Table 2",https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/osfp-800g-transceiver-modules-ds.html,Lower end of the 14-17 W optical endpoint range used for the power band.
+cisco_osfp_800g_dr8_max_power,17.0,W/endpoint,"Cisco OSFP 800G Transceiver Modules Data Sheet, Table 2",https://www.cisco.com/c/en/us/products/collateral/interfaces-modules/transceiver-modules/osfp-800g-transceiver-modules-ds.html,OSFP-800G-DR8/DR8P max power is listed as 16/17 W.
+nvidia_passive_dac_osfp_end_power,0.1,W/endpoint,NVIDIA MCP7Y00-Nxxx 800Gb/s passive DAC product specifications,https://docs.nvidia.com/networking/display/mcp7y00nxxx800pub,NVIDIA lists OSFP ends at 0.1 W for passive DAC.

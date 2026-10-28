@@ -1,0 +1,11 @@
+{
+  "status": "ok",
+  "errors": [],
+  "warnings": [],
+  "groups_checked": 12,
+  "case_records_checked": 48,
+  "windows_checked": 72,
+  "metric_rows_checked": 48,
+  "window_rows_checked": 288,
+  "core_rows_checked": 120576
+}

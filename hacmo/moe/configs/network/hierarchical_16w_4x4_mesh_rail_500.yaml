@@ -1,0 +1,15 @@
+topology: [ Switch, Mesh ]
+npus_count: [ 16, 16 ]
+
+# 16 wafers, each wafer is a 4x4 die mesh. Cross-wafer traffic uses
+# rail-only edge I/O ports and a switch plane.
+bandwidth: [ 500.0, 2000.0 ]  # GB/s [inter-wafer rail I/O, intra-wafer mesh]
+latency: [ 2000.0, 500.0 ]    # ns   [switch/rail hop, mesh hop]
+
+rail-optimized: true
+switch-dim-index: 0
+mesh-dim-index: 1
+
+# 4x4 edge rail ports (16 entries), corners appear twice.
+rail-port-nodes: [0, 1, 2, 3, 3, 7, 11, 15, 15, 14, 13, 12, 12, 8, 4, 0]
+rail-port-bw-scales: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]

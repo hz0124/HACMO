@@ -1,0 +1,8 @@
+# Equal-budget vLLM GPU baseline: 256 active GPUs organized as NVL72-like
+# NVLink domains.  Modeled as a one-dimensional equivalent flat switch so it
+# can run on ASTRA congestion-aware; the bandwidth is stronger than DGX but
+# below the layered-supernode switch-mesh fabric used by HACMO.
+topology: [ Switch ]
+npus_count: [ 256 ]
+bandwidth: [ 180.0 ]  # GB/s effective cluster all-to-all path
+latency: [ 1200.0 ]   # ns

@@ -1,0 +1,5 @@
+component,component_zh,area_mm2,share_of_wafer_pct,source
+NPU + HBM + I/O controllers,NPU + HBM + I/O 控制器,26640.0,38.05714285714286,FRED Sec. 6.2.2
+HACMO side-local crossbars,HACMO 侧边本地 crossbar,2740.0,3.914285714285714,4 x FRED3(12) L1 switch area from FRED Table 4
+Remaining unclaimed area,剩余未占用面积,40620.0,58.02857142857143,Derived from FRED wafer area
+Reference: full FRED fabric,参考：完整 FRED fabric,25195.0,35.99285714285714,FRED Table 4

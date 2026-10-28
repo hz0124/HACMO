@@ -1,0 +1,17 @@
+{
+  "status": "ok",
+  "long_rows_checked": 64,
+  "summary_rows_checked": 16,
+  "groups_checked": 16,
+  "methods": [
+    "B",
+    "C",
+    "S",
+    "O"
+  ],
+  "gpu_method_present": false,
+  "component_identity_checked": true,
+  "cp2_reuse_checked": true,
+  "errors": [],
+  "source_validation_status": "ok"
+}

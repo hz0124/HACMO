@@ -1,0 +1,296 @@
+{
+  "status": "candidate",
+  "scope": "non-CP TP1 selected-KV core attention",
+  "methods": {
+    "B": "uniform mapping, no persistent KV cache",
+    "C": "uniform compute/cache mapping, no layer prefetch",
+    "S": "frozen offline non-uniform compute/cache mapping only",
+    "O": "identical S mapping plus causal layer prefetch"
+  },
+  "hardware": {
+    "total_sram_bytes": 461373440,
+    "cache_ratio": 0.2,
+    "kv_entry_bytes": 656,
+    "cacheline_bytes": 128,
+    "hbm_ports": 8,
+    "aggregate_hbm_gb_per_s": 4800.0,
+    "noc_link_gb_per_s": 256.0,
+    "noc_link_latency_ns": 2.0,
+    "die_compute_tflops": 2250.0,
+    "flops_per_selected_kv": 294912.0,
+    "topk": 2048,
+    "n_layers": 61,
+    "max_context": 18000,
+    "ramulator_channels_per_port": 16,
+    "ramulator_channel_width_bits": 128,
+    "ramulator_data_rate_mtps": 2000,
+    "ramulator_tck_ns": 1.0,
+    "ramulator_issue_width": 16,
+    "ramulator_source_issue_width": 0,
+    "ramulator_internal_prefetch_size": 2
+  },
+  "noc_link_setting": {
+    "scope": "per directed physical Mesh2D link",
+    "configured_gb_per_s": 256.0,
+    "nominal_derivation": "2048 bit/cycle * 1.0 GHz / 8 = 256 GB/s",
+    "paper_range": "128-2048 bit/cycle; frequency is independently configurable in the paper design space",
+    "legacy_5tbps_interpretation": "shared 20-column analytical bandwidth, not per-link bandwidth"
+  },
+  "compute_scope": {
+    "included": "selected-KV QK and SV arithmetic",
+    "flops_per_selected_kv_formula": "2 operations * 2 matmuls * 128 heads * 576 dimensions",
+    "excluded_common_work": "QKV/output projections are method-identical and outside this selected-KV core pack"
+  },
+  "runtime_backends": {
+    "hbm": "request-aware Ramulator2 HBM3 with full drain",
+    "noc": "ASTRA-Sim congestion-aware Mesh2D with deterministic XY routing",
+    "gamma_used": false,
+    "ramulator_binary": "HACMO_CHECKPOINT/build/third_party/ramulator2-build/ramulator2",
+    "ramulator_binary_sha256": "e1e09ac790c96d298dd3c9fa3f03a511f80a040043b6e83b5e02cec57bd01126",
+    "astra_binary": "HACMO_CHECKPOINT/astra-sim/build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Aware",
+    "astra_binary_sha256": "c7983360ba5543fdfe722cd46cf228f0ffa16bc78de1dd143ec9111849faf213",
+    "astra_system_config_sha256": "ecb5a3ab0fd70b008cf1c7b20a1b47a58f3cf5d6d7edb8cd4980af2518c15da6",
+    "astra_remote_memory_config_sha256": "a4d8229c75a6425ca081d9dfe77c09cfafd922dbf99d8a72fbb759e115b394c1"
+  },
+  "offline_solver": {
+    "equation": "paper Eq. (1)-style candidate scoring only",
+    "gamma": 1.0,
+    "compute_gradients": [
+      0.0,
+      0.05,
+      0.1,
+      0.125,
+      0.25,
+      0.5
+    ],
+    "cache_gradients": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.25,
+      3.0
+    ],
+    "selection_constraint": "S requires positive compute and cache gradients; zero-gradient scores are retained as controls",
+    "training_profile_hashes": [
+      "08282c01f69b56bc531937338897be2f0f7937942c9eddd3469a0dca5a4a21b7",
+      "0a53bc33a7e5b8d9a3258895e4a49205aa1cc2321018daca5cc85b159771bf4e",
+      "8aba18151df0e88a849c571053be4e9675e624132bad785c9c2daa889fe07004",
+      "6b54e7a3e8d5b5c39dc90cc28becf00b00e7714f90758ce8b093929bf3b70509",
+      "96275e949872ffb77eeda5dd47c73b29d122e7ff666d51483df1ec9cc515da6e"
+    ],
+    "layer": 30,
+    "decode_steps": [
+      0,
+      1
+    ],
+    "cache_population_layers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60
+    ]
+  },
+  "heldout_profiles": {
+    "8k": [
+      {
+        "prompt_id": "longbench_gov_report_7bd08c647abd58bb482cb17e283469e5fcb55b545bb0b49f",
+        "task": "gov_report",
+        "prompt_len": 8007,
+        "sha256": "63a947cd29a480ee195db5891818e99c41bef6917d02642822c4b5ebb66c8377",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_gov_report_7bd08c647abd58bb482cb17e283469e5fcb55b545bb0b49f_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_hotpotqa_834ced6842436a1c77d203700bfcb2526641b70c04101553",
+        "task": "hotpotqa",
+        "prompt_len": 8008,
+        "sha256": "8d4b8670072f4271b7fedfdbafaff7abc0e8cfa56523b207ab1054a8e975290c",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_hotpotqa_834ced6842436a1c77d203700bfcb2526641b70c04101553_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_multi_news_89f76a25124525470ca9ee302957b683273e9e44c61e4e20",
+        "task": "multi_news",
+        "prompt_len": 8043,
+        "sha256": "eba0b0b9391d7c8d0fbc38f98dc84cbdecbac5d042a124e8962b4ae1c128a0e7",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_multi_news_89f76a25124525470ca9ee302957b683273e9e44c61e4e20_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_passage_retrieval_en_de23e2b1d2dd91ee82fbc68d8a5a15aca03f8c6afccc5c91",
+        "task": "passage_retrieval_en",
+        "prompt_len": 8019,
+        "sha256": "2b1bf155a628ce616abc98243ce06cd72ca58caf31b2fc8a7a27f421c5b59951",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_passage_retrieval_en_de23e2b1d2dd91ee82fbc68d8a5a15aca03f8c6afccc5c91_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_repobench-p_281545dd015defdcfc5daf9f7dc2b02a9e3e3a2ac5bda2f5",
+        "task": "repobench-p",
+        "prompt_len": 8050,
+        "sha256": "fcff9d79dd65ce99333be6be13c05fb2154e9ef687ed011f962655e7b5b3c39f",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_repobench-p_281545dd015defdcfc5daf9f7dc2b02a9e3e3a2ac5bda2f5_profile.pkl"
+      }
+    ],
+    "16k": [
+      {
+        "prompt_id": "longbench_gov_report_d78a643b8035216611256f13da49d6d06363b3e34c3b7ef1",
+        "task": "gov_report",
+        "prompt_len": 15920,
+        "sha256": "750a48f6f913ad0f1e3bf7fb9468dce77be346eb6be6477c0dd8b82a84d1d3c1",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_gov_report_d78a643b8035216611256f13da49d6d06363b3e34c3b7ef1_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_hotpotqa_b5d8cd10520b2a67b18af73e7c219160f13dd5b4f60ebd18",
+        "task": "hotpotqa",
+        "prompt_len": 15986,
+        "sha256": "252f03587a489b03c209d87de548f59a7bcec1f10b8e54558cb5bac9dcd129b7",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_hotpotqa_b5d8cd10520b2a67b18af73e7c219160f13dd5b4f60ebd18_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_multi_news_6c92d02a0f3d8f3d32f6e4fb81c4ec2f86971626af26ad80",
+        "task": "multi_news",
+        "prompt_len": 15618,
+        "sha256": "3b3f054284b373f5fdb9282ab7c66b8e0753adad9fca37448298fe77c7ef3072",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_multi_news_6c92d02a0f3d8f3d32f6e4fb81c4ec2f86971626af26ad80_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_passage_retrieval_en_59df062dfb56b0cc20d53ab22838411559e1fb58fbab7124",
+        "task": "passage_retrieval_en",
+        "prompt_len": 14469,
+        "sha256": "a5e5e918eb404fb70a5fb1ca298514b50faa75cbf1a291375642b4b29cbd7d2f",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_passage_retrieval_en_59df062dfb56b0cc20d53ab22838411559e1fb58fbab7124_profile.pkl"
+      },
+      {
+        "prompt_id": "longbench_repobench-p_2980b7644ae898643d310f09451c0a8863f8454382edb655",
+        "task": "repobench-p",
+        "prompt_len": 15859,
+        "sha256": "83f11beda822eb0dfabd029ad6bbb8ff62a0af18924debdbb9432f15b906bb88",
+        "source_path": "HACMO_CHECKPOINT/rebuttal/active/sparse_sensitivity/results/pkl_longbench_tp1_15_top2048_compact/longbench_repobench-p_2980b7644ae898643d310f09451c0a8863f8454382edb655_profile.pkl"
+      }
+    ]
+  },
+  "sampled_layers": [
+    0,
+    30,
+    60
+  ],
+  "sampled_decode_steps": [
+    0,
+    1
+  ],
+  "sample_order": "decode step major, then layer; cache/LRU state replays every layer while only requested layers enter the timed simulator",
+  "preceding_phase": {
+    "role": "identical frozen overlap window for every TP1 method",
+    "source_csv": "HACMO_CHECKPOINT/hacmo/Ablation2_new/outputs/tp2_serving_epoch_paper_pack_20260613/csv/tp2_serving_epoch_astra_comm_only_summary.csv",
+    "source_sha256": "6d98f7ecbb5bdfcbaeeea743b00fcafd9273f9d770bef1cb7888856c528f6154",
+    "topology": "16w_4x4_rail_500",
+    "method": "ours_dynamic",
+    "duration_us_by_batch": {
+      "16": 114.089315,
+      "32": 227.073091,
+      "64": 452.735345
+    }
+  },
+  "excluded_components": {
+    "indexer": "analytical boundary, not included in this core-attention pack",
+    "cp_communication": "may be reported separately as analytical; not included here",
+    "runtime_closed_loop_source_selection": "future optional mechanism"
+  },
+  "trace_contract": {
+    "canonical_input": "per-core KV access routing trace",
+    "hbm_miss_source": "causal residency replay",
+    "baseline_compute_assignment": "B/C use a deterministic topology-oblivious uniform quota schedule for each decode window",
+    "nonuniform_compute_assignment": "S/O exactly preserve the offline per-core quotas while assigning each window's selected KV work from its fixed address-derived HBM port to the nearest core with remaining quota",
+    "assignment_isolation": "the per-window assignment is completed before source classification and reads only the frozen mapping plus the current selected KV identities and addresses; it does not read cache state, runtime congestion, Ramulator completion, or ASTRA output",
+    "source_selection": "after the per-window compute assignment is frozen, explicit persistent single-owner residency classifies each access as local, remote, or HBM",
+    "demand_fill": "consumer-local, capacity-accounted LRU insertion after HBM arrival",
+    "sampled_state_equivalence": "untimed layers reuse the same compute assignment, demand-fill, prefetch-target, and LRU rules as timed layers",
+    "hbm_port_mapping": "KV block round-robin across ports; dense port-local block address inside each Ramulator instance",
+    "hbm_transaction_projection": "each logical cacheline expands into HBM3 internal-prefetch transactions; ASTRA receives their conserved total bytes",
+    "layer_prefetch_capacity": "min(per-request physical cache share, topk) KV entries per request",
+    "flow_packetization": 32,
+    "flow_packetization_semantics": "lossless byte/work aggregation, no core or access sampling",
+    "hbm_readiness_quantum_ns": 10.0,
+    "hbm_packetization_rule": "same endpoints and same represented readiness tick only",
+    "ramulator_window_gap_ns": 1000000.0
+  },
+  "validation": {
+    "status": "ok",
+    "errors": [],
+    "warnings": [],
+    "groups_checked": 12,
+    "case_records_checked": 48,
+    "windows_checked": 72,
+    "metric_rows_checked": 48,
+    "window_rows_checked": 288,
+    "core_rows_checked": 120576
+  },
+  "implementation_sha256": {
+    "HACMO_CHECKPOINT/hacmo/Ablation1/tp1_core/generate_audited_tp1_pack.py": "35493424da0d1b633306c272e3fcfe34162e610de54713c3f07168485d8c58bc",
+    "HACMO_CHECKPOINT/hacmo/Ablation1/tp1_core/workload.py": "9b119274f68ece4e0a0735fcc64c4e17ba433e2f7fd8b89a6d42c38440f20c8e",
+    "HACMO_CHECKPOINT/hacmo/Ablation1/tp1_core/mapping.py": "1c75dbd5c07392a7632f574d5f02c128a55762b795bb5c1be71a218582483523",
+    "HACMO_CHECKPOINT/hacmo/Ablation1/tp1_core/routing.py": "6541462e0f1a54756842c465802596abaf0197a660d092e2654ef676b614715d",
+    "HACMO_CHECKPOINT/hacmo/Ablation1/tp1_core/offline_solver.py": "c46b52a880e709329eb08cea30e38b27e715ba19fd3d8871f39af1c3213db347",
+    "HACMO_CHECKPOINT/supernode_sim/backends/ramulator.py": "4a3436f6e0710c0cad7eea1f429b9fb4392149b86bf0a22508c36b78d156db8c",
+    "HACMO_CHECKPOINT/supernode_sim/backends/tp1_astra.py": "41b0c84e613398cd1763ded6873ab3e0cd18511087de077914b97ebf813e8247",
+    "HACMO_CHECKPOINT/supernode_sim/tools/ramulator2_timed_trace.cpp": "44191d81f89e00b86b03d8dda4e7b50c86a66c034c10225bb5ea19d370fea077",
+    "HACMO_CHECKPOINT/supernode_sim/tools/astra_mesh2d.cpp": "d51f41a77962fcec41b60995d34063d4e4b49fbecfc8d5d95643e8cc7cbeea43",
+    "HACMO_CHECKPOINT/supernode_sim/tools/astra_mesh2d.h": "e7803fdd5318ec74173f4c56db3d288ba541530671556928faa16d9d4c20d246",
+    "HACMO_CHECKPOINT/supernode_sim/tools/astra_statistics_cpu_timer.patch": "826ddcb7483fe659743882a3a09c52840b725e5da1f42485b417672145fd593b"
+  }
+}

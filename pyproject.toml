@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hacmo"
+version = "0.1.0"
+description = "MICRO 2026 cross-layer mapping for sparse LLMs on layered supernodes"
+readme = "README.md"
+requires-python = ">=3.10,<3.13"
+license = {text = "MIT"}
+dynamic = ["dependencies"]
+
+[project.urls]
+Repository = "https://github.com/hz0124/HACMO"
+Artifact = "https://doi.org/10.5281/zenodo.22658850"
+
+[tool.setuptools.dynamic]
+dependencies = {file = ["requirements.txt"]}
+
+[tool.setuptools.packages.find]
+include = ["hacmo*", "supernode_sim*"]
+exclude = ["*.tests*"]
+
+[tool.pytest.ini_options]
+testpaths = ["supernode_sim/tests", "ae/tests", "hacmo/attention/tests", "hacmo/moe/tests", "hacmo/interconnect/tests", "hacmo/overall/tests"]
+pythonpath = ["."]

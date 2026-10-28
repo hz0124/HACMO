@@ -1,0 +1,19 @@
+Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+Copyright (c) 2026 The HACMO Authors
+
+The HACMO-authored data distributed with this artifact is licensed under the
+Creative Commons Attribution 4.0 International license. This includes the
+compact H200 sparse-attention profiles, author-generated support tables, and
+author-generated expected-result tables.
+
+You may share and adapt this material for any purpose, provided that you give
+appropriate credit, provide a link to the license, and indicate whether changes
+were made. The full license terms are available at:
+
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+This license does not apply to third-party software or third-party datasets.
+In particular, the MoE expert-selection traces remain under the ownership and
+distribution terms of their original authors and are not redistributed in the
+HACMO artifact.

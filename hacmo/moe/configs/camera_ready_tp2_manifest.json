@@ -1,0 +1,94 @@
+{
+  "version": "camera-ready-v1",
+  "case": "high_drift_uniform_pool_law_math_elem_human_aging",
+  "trace_source": {
+    "repo_id": "core12345/MoE_expert_selection_trace",
+    "revision": "27febb7b2d24169560a9f6f83d38eb53f94916cf"
+  },
+  "static_mapping_solves": {
+    "4w_cap256": {
+      "solver_topology": "4w_8x8_rail_900",
+      "library_max_requests": 256,
+      "library_slices": [
+        "professional_law[0:256]",
+        "miscellaneous[0:256]"
+      ],
+      "epoch_t_telemetry": "professional_law[256:416]",
+      "expert_to_dies_sha256": "8d78a5554fef87f61085f588ffaf17d320b595a6d87914dc90d1bc8ee5e51f70"
+    },
+    "4w_cap96": {
+      "solver_topology": "4w_8x8_rail_900",
+      "library_max_requests": 96,
+      "library_slices": [
+        "professional_law[0:96]",
+        "miscellaneous[0:96]"
+      ],
+      "epoch_t_telemetry": "professional_law[256:416]",
+      "expert_to_dies_sha256": "b6b05fd5b66b48aa6d038e9f2052b06708f555e7dea3ccaf942cf06626d4f475"
+    },
+    "16w_cap96": {
+      "solver_topology": "16w_4x4_rail_500",
+      "library_max_requests": 96,
+      "library_slices": [
+        "professional_law[0:96]",
+        "miscellaneous[0:96]"
+      ],
+      "epoch_t_telemetry": "professional_law[256:416]",
+      "expert_to_dies_sha256": "a43a211e7a2a378b81dd96713809f492beb8207aca03aab396cba2013f8cfc2e"
+    }
+  },
+  "cell_mapping_provenance": {
+    "_note": "Each paper-facing cell records the offline expert-placement solve it consumed. The published grid is not uniform in the library request cap; see docs/adr/0001. MoEnTwine variants carry the cell key for coherence only, since MoEnTwine uses its own placement.",
+    "4w_8x8_rail_900": {
+      "16": "4w_cap256",
+      "32": "4w_cap96",
+      "64": "4w_cap256",
+      "128": "4w_cap256"
+    },
+    "16w_4x4_rail_500": {
+      "16": "4w_cap256",
+      "32": "16w_cap96",
+      "64": "16w_cap96",
+      "128": "4w_cap256"
+    }
+  },
+  "runtime": {
+    "seed": 17,
+    "decode_len": 128,
+    "window_size": 8,
+    "tail_steps": 16,
+    "layer": 23,
+    "batch_scope": "per_die",
+    "batch_sizes": [16, 32, 64, 128],
+    "replacement_pool": [
+      "high_school_mathematics[0:90]",
+      "elementary_mathematics[0:90]",
+      "human_aging[0:90]"
+    ]
+  },
+  "expected_input_hashes": {
+    "16": {
+      "step_inputs": "a9668e2c831ae052d02013bdea73ab2f76c94cedf5eeadaab78d66d3b656feb3",
+      "window_stats": "ae583eb4d2f50e083402b0e2439de3af432da489db4b38495a00fd6848b186ca",
+      "window_src_expert_counts": "d889d37127c8bfb42990d8aecbda5c32cb653421b2c67154ae27105340e34bfd"
+    },
+    "32": {
+      "step_inputs": "bb0c10f0750c871cdd9d735c73b1036d46f4ddf56d3121d7cf21a459eca045b5",
+      "window_stats": "125e053222a4702d99db451abd19e851a910256d0cf6e0716fdd2c2e8b4b8021",
+      "window_src_expert_counts": "9b2ca958035f47b636ccf3c35d321d9b72867c605921a0978a40ac903bf238af"
+    },
+    "64": {
+      "step_inputs": "e3996b5c816e816b779f71a7937f221ab4f11c54628b852393fb590a102364e2",
+      "window_stats": "68b51a0317d4474f063416a0b87e372b478c4a5cf783e9def12de6affaaf27fe",
+      "window_src_expert_counts": "3fd638e4218b7534f2f673f4b583bed259f07992fbe24b0155bc2b909b852fc3"
+    },
+    "128": {
+      "step_inputs": "390f0f80d2d3e03f941340eca0d7f5113b12790d525a5746e4a73c97cbf71b01",
+      "window_stats": "4395437c2dcbd1a09bd7c9493ab1d842d3a0f24acd54589610ac5fe03ea01067",
+      "window_src_expert_counts": "23ab415ac1b3b207af240f150b59a6aff992a24d00586cc96bd64c7913079872"
+    }
+  },
+  "authority": {
+    "paper_figure_summary_sha256": "c70214415e42e2378806d6bb60ba9a908b9612f7301e9b08e498b2545591b95e"
+  }
+}

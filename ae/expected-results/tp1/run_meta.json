@@ -1,0 +1,164 @@
+{
+  "git": {
+    "hacmo": {
+      "path": "<HACMO_REPO>",
+      "head": "b632f560a28afd1cf78a0c40d4534c824790ba6f",
+      "dirty": true
+    },
+    "astra_sim": {
+      "path": "<HACMO_REPO>/astra-sim",
+      "head": "",
+      "dirty": null
+    },
+    "vllm": {
+      "path": "<HACMO_REPO>/vllm",
+      "head": "3fd1d4ec2c992689594f9c7ee0ac79597f74a2ef",
+      "dirty": true
+    }
+  },
+  "profile_files": [
+    "<TP1_PROFILE_DIR>/govreport_0_profile.pkl",
+    "<TP1_PROFILE_DIR>/govreport_1_profile.pkl",
+    "<TP1_PROFILE_DIR>/govreport_2_profile.pkl"
+  ],
+  "layer_ids": [
+    0,
+    6,
+    12,
+    18,
+    24,
+    30,
+    36,
+    42,
+    48,
+    54,
+    60
+  ],
+  "gamma": 1.3044203594054058,
+  "motivation": {
+    "batch_sizes": [
+      8,
+      16,
+      32,
+      64,
+      128
+    ],
+    "cache_ratios_C": [
+      0.05,
+      0.1,
+      0.2
+    ],
+    "array_sizes": [
+      [
+        20,
+        20
+      ],
+      [
+        32,
+        32
+      ],
+      [
+        68,
+        68
+      ]
+    ],
+    "dense_ref_bw_util": 0.47
+  },
+  "ablation": {
+    "batch_sizes": [
+      8,
+      16,
+      32,
+      64
+    ],
+    "context_lens": [
+      8192,
+      32768
+    ],
+    "array_sizes": [
+      [
+        20,
+        20
+      ],
+      [
+        68,
+        68
+      ]
+    ],
+    "x_groups": [
+      "8",
+      "16",
+      "32",
+      "64",
+      "64+CP2",
+      "128+CP4"
+    ],
+    "methods": [
+      "G",
+      "B",
+      "C",
+      "S",
+      "O"
+    ],
+    "P_definition": "Dynamic prefetch only; O-style hit-rate, C-style mapping terms.",
+    "S_definition": "Static mapping only; C-style hit-rate with mapping optimization terms.",
+    "O_definition": "Static mapping + dynamic prefetch."
+  },
+  "cp_bridge_assumptions": {
+    "gpu_vllm_profile": "neutral",
+    "gpu_mem_penalty_vs_B": 1.08,
+    "supernode_cp_comm_bw_tbps": 5.0,
+    "supernode_cp_comm_hops": {
+      "cp2": 1.0,
+      "cp4": 1.5
+    },
+    "gpu_cp_comm_bw_tbps": 0.9,
+    "gpu_cp_comm_hops": {
+      "cp2": 1.0,
+      "cp4": 1.5
+    },
+    "gpu_cp_collective_multiplier": 1.0
+  },
+  "hbm_model": {
+    "model": "service_curve",
+    "hbm_service_curve_json": "hacmo/Ablation1/outputs/technical_point1_rebuttal_pipeline/hbm_service_curve/hbm_service_curve.json",
+    "hbm_peak_tbps": 4.8,
+    "dense_hbm_util": 0.47,
+    "sparse_pattern": "profile",
+    "near_sram_hops": null,
+    "near_sram_hops_mode": "auto_cols_clamped",
+    "near_sram_hops_auto_formula": "max(1.0, min(4.0, array_cols / 16.0))",
+    "sparse_compute_tokens": 2048.0,
+    "kv_entry_bytes": 656,
+    "selected_kv_bytes_per_token": 656.0,
+    "indexer_model": "deepseek_v32",
+    "selector_meta_bytes": 16.0,
+    "indexer_k_bytes_per_token": 128.0,
+    "indexer_scale_bytes_per_token": 4.0,
+    "indexer_extra_bytes_per_token": 0.0,
+    "indexer_index_bytes": 4.0,
+    "indexer_hbm_util": 0.47,
+    "indexer_n_heads": 64.0,
+    "indexer_head_dim": 128.0,
+    "indexer_compute_tflops": 2250.0,
+    "noc_model": "shared",
+    "noc_bw_scale_mode": "cols",
+    "astra_sim_dir": "<HACMO_REPO>/astra-sim",
+    "astra_system_config": "<HACMO_REPO>/hacmo/Ablation1/astrasim_inner_die/configs/system/inner_die_attention_system.json",
+    "astra_remote_memory_config": "<HACMO_REPO>/hacmo/Ablation1/astrasim_inner_die/configs/remote_memory/no_memory_expansion.json",
+    "astra_network_backend": "congestion_aware",
+    "astra_hop_latency_ns": 2.0,
+    "astra_max_flows_per_component": 256,
+    "astra_run": true,
+    "astra_output_root": "<HACMO_REPO>/hacmo/Ablation1/outputs/technical_point1_final_pack_static_traffic_shared_20260612/raw/astra_wafer_core_noc"
+  },
+  "ablation_cache_ratio": 0.4,
+  "hit_rate_override_csv": "",
+  "hit_rate_overrides": [],
+  "policy_semantics": {
+    "C": "Naive all-layer on-chip cache. total_sram_mb * cache_ratio is divided across n_layers.",
+    "S": "Static mapping only. Uses C hit-rate/capacity semantics plus spatial mapping scales.",
+    "O": "Static mapping + layer-wise dynamic prefetch. Current layer can use the full dynamic buffer; hits are split into local/near/far SRAM traffic."
+  },
+  "mapping_profile_json": "hacmo/Ablation1/outputs/technical_point1_rebuttal_pipeline/core_static_mapping_profile.json"
+}

@@ -1,0 +1,17 @@
+{
+  "status": "ok",
+  "errors": [],
+  "source_tp1_validation_status": "ok",
+  "v11_rows_checked": 108,
+  "refreshed_rows_checked": 108,
+  "panel_rows_checked": 108,
+  "coverage": {
+    "direct_tp1_rows": 66,
+    "v11_context_fallback_rows": 18,
+    "unchanged_dense_rows": 24
+  },
+  "non_tp1_contract": "all TP2/TP3/MoE fields exactly equal v11",
+  "dense_model_contract": "all Qwen3 and Llama4 rows exactly equal v11",
+  "unsupported_context_contract": "all numeric fields exactly equal v11; provenance suffix only",
+  "stock_validator_compatibility": "not applicable: the repository validator hard-codes the 20260612 TP1 path/method markers and requires replacement of the root manuscript figure copies"
+}

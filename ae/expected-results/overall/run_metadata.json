@@ -1,0 +1,19 @@
+{
+  "producer": "hacmo/overall/scripts/run_overall_rebuttal.py",
+  "release": "camera-ready-v1",
+  "regenerated_by_the_workflow": [
+    "DeepSeek-V3.2 columns, from the Technical Point 1, 2 and 3 stages of this workflow"
+  ],
+  "consumed_as_bundled_input": [
+    "ae/data/overall-support/qwen/tp2",
+    "ae/data/overall-support/qwen/tp3",
+    "ae/data/overall-support/llama/tp2",
+    "ae/data/overall-support/llama/tp3",
+    "ae/data/overall-support/tp1-support",
+    "ae/data/overall-support/tp1-context-16k",
+    "ae/expected-results/tp1/source/tp1_gpu_measured_baseline.csv"
+  ],
+  "sparse_attention_profiles": "ae/data/tp1/profiles (compact processed H200 profiles)",
+  "known_deviation": "The archived table was produced from the raw H200 measurement directories, which are not distributable. Regenerating from the shipped compact profiles reproduces every scenario exactly except context_tps at contexts 32768 and 65536, which land within 1.3 percent and 0.9 percent. Both Figure 9 claims are read off model_compare, which is exact.",
+  "supersedes": "The AE v2 disclosure that every Qwen, Llama and Technical Point 2/3 field was frozen from the audited v1 table. Those Qwen and Llama packs were recomputed for the camera-ready paper and ship as bundled inputs."
+}

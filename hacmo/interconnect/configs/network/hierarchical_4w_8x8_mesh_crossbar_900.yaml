@@ -1,0 +1,18 @@
+topology: [ Switch, Mesh ]
+npus_count: [ 4, 64 ]
+
+# 4 wafers, 8x8 die mesh with four independent edge-local crossbars per wafer.
+# Each wafer edge owns side=8 external logical I/O ports. The crossbar may
+# reassign only those 8 ports among the 8 die-side groups on the same edge;
+# it cannot borrow ports across wafer edges or across wafers.
+bandwidth: [ 900.0, 2000.0 ]  # GB/s [per external I/O port, intra-wafer mesh]
+latency: [ 2000.0, 500.0 ]    # ns   [switch hop, mesh hop]
+crossbar-latency-ns: 20.0     # ns   [edge-local grant/mux pipeline]
+
+rail-optimized: false
+switch-dim-index: 0
+mesh-dim-index: 1
+
+# Crossbar mode: edge-local port allocation.
+crossbar-mode: true
+crossbar-ports: 32  # Total external I/O ports per wafer; allocation scope is 8 per edge.

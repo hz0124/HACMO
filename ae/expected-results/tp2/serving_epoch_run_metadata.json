@@ -1,0 +1,39 @@
+{
+  "runner": "hacmo/Ablation2_new/scripts/run_camera_ready_tp2.py",
+  "release": "camera-ready-v1",
+  "case": "high_drift_uniform_pool_law_math_elem_human_aging",
+  "topologies": ["4w_8x8_rail_900", "16w_4x4_rail_500"],
+  "methods": ["vllm", "moentwine", "ours_static", "ours_dynamic"],
+  "batch_scope": "per_die",
+  "batch_sizes": [16, 32, 64, 128],
+  "seed": 17,
+  "decode_len": 128,
+  "window_size": 8,
+  "tail_steps": 16,
+  "astra": {
+    "trace_mode": "communication_only",
+    "network_backend": "congestion_aware",
+    "route_plan_is_authoritative": true
+  },
+  "trace_mix": {
+    "admission_policy": "uniform_pool",
+    "epoch_t_telemetry": "professional_law[256:416]",
+    "replacement_pool": [
+      "high_school_mathematics[0:90]",
+      "elementary_mathematics[0:90]",
+      "human_aging[0:90]"
+    ]
+  },
+  "static_mapping_solves": {
+    "4w_cap256": {"solver_topology": "4w_8x8_rail_900", "library_max_requests": 256},
+    "4w_cap96": {"solver_topology": "4w_8x8_rail_900", "library_max_requests": 96},
+    "16w_cap96": {"solver_topology": "16w_4x4_rail_500", "library_max_requests": 96}
+  },
+  "cell_mapping_provenance": {
+    "4w_8x8_rail_900": {"16": "4w_cap256", "32": "4w_cap96", "64": "4w_cap256", "128": "4w_cap256"},
+    "16w_4x4_rail_500": {"16": "4w_cap256", "32": "16w_cap96", "64": "16w_cap96", "128": "4w_cap256"}
+  },
+  "mapping_input_basis_bpd": {"tp3": 64, "overall": 32},
+  "moentwine_16w_deployment_policy": "lower measured tail16 total between full HER and no-HER per batch",
+  "notes": "Each grid cell records the offline expert-placement solve it consumed; see docs/adr/0001-tp2-per-cell-mapping-provenance.md. The solve is deterministic given its topology and library request cap, so the workflow re-derives every placement rather than shipping it."
+}

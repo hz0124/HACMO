@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "Please cite the MICRO 2026 HACMO paper and the artifact version used."
+type: software
+title: "HACMO: Artifact for Heterogeneity-Aware Cross-Layer Mapping Optimization for Sparse LLMs on Layered Supernodes"
+authors:
+  - family-names: Zhang
+    given-names: Hanbin
+  - family-names: Liu
+    given-names: Jun
+  - family-names: Ni
+    given-names: Rongquan
+  - family-names: Zhang
+    given-names: Yuxuan
+  - family-names: Dai
+    given-names: Guohao
+doi: 10.5281/zenodo.22658850
+version: camera-ready-v1
+date-released: 2026-09-08
+repository-code: "https://github.com/hz0124/HACMO"
+license: MIT

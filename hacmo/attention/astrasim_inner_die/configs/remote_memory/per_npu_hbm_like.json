@@ -1,0 +1,5 @@
+{
+  "memory-type": "PER_NPU_MEMORY_EXPANSION",
+  "remote-mem-latency": 200,
+  "remote-mem-bw": 2400
+}

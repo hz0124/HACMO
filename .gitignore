@@ -1,0 +1,46 @@
+# Python and test artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.venv/
+
+# Reviewer-downloaded data and generated outputs
+ae/data/
+ae/work/
+
+# Build products and simulator traces
+build/
+!astra-sim/build/
+astra-sim/build/*
+!astra-sim/build/astra_analytical/
+astra-sim/build/astra_analytical/*
+!astra-sim/build/astra_analytical/build.sh
+!astra-sim/build/astra_analytical/CMakeLists.txt
+*.et
+*.log
+/core
+/core.*
+
+# Editor and OS files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# Local release diagnosis tracker (never packaged)
+.scratch/
+ae-env/
+
+# Optional experiment products and local credentials
+hacmo/**/outputs/
+hacmo/**/motivation/
+.env
+.env.*
+*.pem
+*.key
+dist/

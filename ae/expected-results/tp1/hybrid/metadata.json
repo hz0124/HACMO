@@ -1,0 +1,74 @@
+{
+  "status": "final",
+  "result_class": "hybrid_simulator_plus_analytical_cp",
+  "scope": "TP1 selected-KV core attention; analytical CP only for 128+CP2",
+  "methods": [
+    "B",
+    "C",
+    "S",
+    "O"
+  ],
+  "gpu_baseline_included": false,
+  "batch_specs": [
+    {
+      "label": "16",
+      "global_batch": 16,
+      "cp_degree": 1,
+      "simulated_batch_per_die": 16
+    },
+    {
+      "label": "32",
+      "global_batch": 32,
+      "cp_degree": 1,
+      "simulated_batch_per_die": 32
+    },
+    {
+      "label": "64",
+      "global_batch": 64,
+      "cp_degree": 1,
+      "simulated_batch_per_die": 64
+    },
+    {
+      "label": "128+CP2",
+      "global_batch": 128,
+      "cp_degree": 2,
+      "simulated_batch_per_die": 64
+    }
+  ],
+  "source_pack": {
+    "path": "HACMO_CHECKPOINT/hacmo/Ablation1/outputs/technical_point1_final_pack_astra_ramulator_trace_driven_20260724",
+    "metrics_sha256": "3ea2b28ff58b1a745144176a69ef57808733a5cda7da8f88d6ab8ebacfae1a42",
+    "metadata_sha256": "b747370fea8f2d044841d6b996c705698025e681ef7798c4834067ee5c504ebc",
+    "validation_sha256": "8faa4b5b2d54ae1954f0c1a2111d7020d9d95f7dbc023fff153d7d28429511fe",
+    "validation_status": "ok",
+    "scope": "non-CP TP1 selected-KV core attention",
+    "runtime_backends": {
+      "hbm": "request-aware Ramulator2 HBM3 with full drain",
+      "noc": "ASTRA-Sim congestion-aware Mesh2D with deterministic XY routing",
+      "gamma_used": false,
+      "ramulator_binary": "HACMO_CHECKPOINT/build/third_party/ramulator2-build/ramulator2",
+      "ramulator_binary_sha256": "e1e09ac790c96d298dd3c9fa3f03a511f80a040043b6e83b5e02cec57bd01126",
+      "astra_binary": "HACMO_CHECKPOINT/astra-sim/build/astra_analytical/build/bin/AstraSim_Analytical_Congestion_Aware",
+      "astra_binary_sha256": "c7983360ba5543fdfe722cd46cf228f0ffa16bc78de1dd143ec9111849faf213",
+      "astra_system_config_sha256": "ecb5a3ab0fd70b008cf1c7b20a1b47a58f3cf5d6d7edb8cd4980af2518c15da6",
+      "astra_remote_memory_config_sha256": "a4d8229c75a6425ca081d9dfe77c09cfafd922dbf99d8a72fbb759e115b394c1"
+    }
+  },
+  "cp_model": {
+    "classification": "analytical component outside ASTRA-Sim/Ramulator",
+    "formula": "element_bytes * per_die_batch * vector_dim * topk * (cp_degree - 1) / cp_degree",
+    "latency_formula": "cp_bytes * hops / bandwidth_bytes_per_second",
+    "bandwidth_tbps": 5.0,
+    "cp2_hops": 1.0,
+    "vector_dim": 576,
+    "element_bytes": 2,
+    "topk": 2048,
+    "cp2_bytes": 75497472,
+    "cp2_latency_us": 15.0994944
+  },
+  "limitations": [
+    "128+CP2 preserves the old experiment convention global_batch/cp_degree = per-die simulated batch.",
+    "CP2 traffic is not emitted into the routed trace and is not fully simulated.",
+    "Indexer and common QKV/output projections are excluded."
+  ]
+}

@@ -1,0 +1,4 @@
+topology: [ Mesh ]
+npus_count: [ 361 ]            # 19x19 mesh, one spare rank approximates 20x18 array
+bandwidth: [ 5000.0 ]          # GB/s, approximate on-die NoC cross-section
+latency: [ 0.5 ]               # ns per hop (2GHz -> 0.5ns)

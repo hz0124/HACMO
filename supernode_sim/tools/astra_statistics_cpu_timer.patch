@@ -1,0 +1,34 @@
+--- a/astra-sim/workload/Statistics.cc
++++ b/astra-sim/workload/Statistics.cc
+@@ -100,9 +100,13 @@ void Statistics::extract_comp_comm_overlap() {
+         case OperatorStatistics::OperatorType::COMM:
+             has_comm = true;
+             break;
++        case OperatorStatistics::OperatorType::CPU:
++        case OperatorStatistics::OperatorType::REMOTE_MEM:
++        case OperatorStatistics::OperatorType::REPLAY:
++        case OperatorStatistics::OperatorType::INVALID:
++            break;
+         default:
+-            throw std::runtime_error(
+-                "Only GPU and COMM types are supported for overlap extraction");
++            throw std::runtime_error("Unsupported operator type");
+         }
+     }
+     if (!has_comp || !has_comm) {
+@@ -110,10 +114,12 @@ void Statistics::extract_comp_comm_overlap() {
+         return;
+     }
+-    Tick overlap = 0;
+-    overlap = this->type_time.at(OperatorStatistics::OperatorType::GPU) +
+-              this->type_time.at(OperatorStatistics::OperatorType::COMM) -
+-              this->wall_time;
+-    this->comp_comm_overlap = overlap;
++    const Tick compute_and_comm =
++        this->type_time.at(OperatorStatistics::OperatorType::GPU) +
++        this->type_time.at(OperatorStatistics::OperatorType::COMM);
++    this->comp_comm_overlap =
++        compute_and_comm > this->wall_time
++            ? compute_and_comm - this->wall_time
++            : 0;
+ }

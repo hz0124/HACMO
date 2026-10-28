@@ -1,0 +1,40 @@
+{
+  "backend": "analytic",
+  "hardware": {
+    "array_rows": 20,
+    "array_cols": 20,
+    "hbm_edges": ["top", "bottom"],
+    "hbm_peak_tbps": 4.8,
+    "noc_bw_tbps": 5.0,
+    "compute_peak_tflops": 2250.0,
+    "total_sram_mb": 440.0
+  },
+  "workload": {
+    "model_name": "DeepSeek-V3.2",
+    "layer_type": "attention",
+    "batch_size": 32,
+    "context_len": 32768,
+    "topk": 2048,
+    "selected_vector_bytes": 576,
+    "hidden_size": 7168,
+    "n_heads": 128,
+    "head_dim": 576,
+    "n_layers": 61
+  },
+  "parallel": {
+    "cp_degree": 1,
+    "horizontal_strategy": "dp",
+    "tp_degree_horizontal": 1,
+    "batch_coalesce": false,
+    "owner_compute": false
+  },
+  "mapping": {
+    "name": "static_prefetch",
+    "cache_policy": "layer_prefetch",
+    "static_mapping": true,
+    "dynamic_prefetch": true,
+    "row_only_static_mapping": true,
+    "prefetch_overlap_us": 100.0
+  }
+}
+

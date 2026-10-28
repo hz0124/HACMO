@@ -1,0 +1,8 @@
+total_wafers,single_cabinet_wafers,total_cabinets,extra_cabinets_cross_rack,extra_wafers_cross_rack,ports_per_4x4_wafer,cross_rack_links,optical_endpoints,optical_power_low_w_per_endpoint,optical_power_high_w_per_endpoint,passive_dac_power_w_per_endpoint,optical_power_kw_14w,optical_power_kw_17w,passive_dac_power_kw
+4,4,1,0,0,16,0,0,14.0,17.0,0.1,0.0,0.0,0.0
+8,4,2,1,4,16,64,128,14.0,17.0,0.1,1.792,2.176,0.0128
+16,4,4,3,12,16,192,384,14.0,17.0,0.1,5.376,6.528,0.038400000000000004
+24,4,6,5,20,16,320,640,14.0,17.0,0.1,8.96,10.88,0.064
+32,4,8,7,28,16,448,896,14.0,17.0,0.1,12.544,15.232,0.08960000000000001
+36,4,9,8,32,16,512,1024,14.0,17.0,0.1,14.336,17.408,0.1024
+64,4,16,15,60,16,960,1920,14.0,17.0,0.1,26.88,32.64,0.192

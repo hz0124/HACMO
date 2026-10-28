@@ -1,0 +1,82 @@
+workload:
+  model_name: DeepSeek-V3.2
+  batch_size: 32
+  context_len: 32768
+  decode_steps: 50
+  layers: 61
+  moe_layers: 58
+  hidden_size: 7168
+  attention_heads: 128
+  head_dim: 576
+  sparse_topk: 2048
+  selected_vector_bytes: 576
+  num_experts: 256
+  moe_topk: 8
+  expert_intermediate_size: 2048
+  freq_json: hacmo/DSE/configs/workload/real_freq_deepseek_r1_layer23.json
+
+hardware:
+  base_array_rows: 16
+  base_array_cols: 16
+  base_sram_per_core_mb: 2.0
+  base_compute_per_core_tflops: 0.512
+  base_hbm_stacks_per_die: 2
+  base_wafer_side: 4
+  target_total_dies: 256
+  hbm_capacity_per_stack_gb: 24.0
+  hbm_bandwidth_per_stack_tbps: 1.0
+  base_noc_bw_tbps: 5.0
+  base_noc_array_cores: 256
+  attention_allreduce_tp: 16
+  attention_allreduce_bw_tbps: 8.0
+  attention_allreduce_latency_ns: 500.0
+  min_hbm_capacity_gb_per_die: 24.0
+  cache_ratio_for_sparse_attention: 0.20
+  max_sparse_hit_rate: 0.92
+  min_sparse_hit_rate: 0.45
+  sparse_cache_tau: 0.60
+
+topology:
+  mesh_bandwidth_gbps: 2000.0
+  mesh_latency_ns: 500.0
+  switch_latency_ns: 2000.0
+  inter_wafer_bw_gbps_by_side:
+    2: 300.0
+    4: 500.0
+    6: 700.0
+    8: 900.0
+  system_config: supernode_sim/configs/astra/system/p2p_only.json
+  remote_memory_config: supernode_sim/configs/astra/remote_memory/no_memory_expansion.json
+  astra_sim_dir: astra-sim
+
+area:
+  die_area_ref_mm2: 645.0
+  n_core_ref: 354
+  compute_ref_tflops_per_die: 362.0
+  compute_logic_area_share: 0.55
+  sram_area_share: 0.35
+  noc_ctrl_area_share: 0.10
+  hbm_stack_raw_area_mm2: 121.0
+  hbm_keepout_factor: 1.20
+  wafer_diameter_mm: 300.0
+  wafer_utilization_factor: 0.80
+  edge_xbar_area_mm2: 2740.0
+  edge_io_area_fraction_of_raw_wafer: 0.05
+
+energy:
+  compute_pj_per_flop: 0.8
+  sram_read_pj_per_bit: 0.05
+  sram_write_pj_per_bit: 0.08
+  noc_pj_per_bit_per_hop: 0.20
+  hbm_pj_per_bit: 3.5
+  d2d_pj_per_bit_per_hop: 0.50
+  inter_wafer_electrical_pj_per_bit: 1.3
+  inter_wafer_optical_pj_per_bit: 15.0
+  switch_pj_per_bit: 1.0
+
+static_power:
+  die_static_power_ratio: 0.20
+  hbm_stack_idle_w: 5.0
+  switch_idle_w: 100.0
+  reference_die_peak_w: 400.0
+  min_die_peak_w: 120.0

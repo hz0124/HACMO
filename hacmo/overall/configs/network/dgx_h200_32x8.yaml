@@ -1,0 +1,8 @@
+# Equal-budget vLLM GPU baseline: 256 GPUs spread over 32 DGX/HGX H200
+# nodes.  The current ASTRA congestion-aware baseline supports one-dimensional
+# standard topologies, so the multi-node cluster is represented as an equivalent
+# flat switch whose bandwidth is the cross-node effective all-to-all bottleneck.
+topology: [ Switch ]
+npus_count: [ 256 ]
+bandwidth: [ 50.0 ]   # GB/s effective scale-out all-to-all path
+latency: [ 3500.0 ]   # ns

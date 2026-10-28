@@ -1,0 +1,183 @@
+{
+  "command_args": {
+    "output_root": "hacmo/overall/outputs/overall_rebuttal_final_context_tps_v11_20260617",
+    "no_gpu_astra": false,
+    "skip_root_copy": false
+  },
+  "generated_at_utc": "2026-06-17T15:58:56.915849Z",
+  "repo": "<HACMO_REPO>",
+  "num_rows": 108,
+  "models": {
+    "deepseek_v32": {
+      "key": "deepseek_v32",
+      "label": "DeepSeek-V3.2",
+      "attention": "dsa",
+      "layers": 61,
+      "moe_layers": 58,
+      "hidden": 7168,
+      "n_heads": 128,
+      "kv_heads": 128,
+      "head_dim": 128,
+      "dense_kv_bytes_per_token": 65536,
+      "sparse_topk": 2048,
+      "selected_vector_bytes": 656,
+      "num_experts": 256,
+      "moe_topk": 8,
+      "expert_intermediate": 2048,
+      "representative_layer": "23"
+    },
+    "qwen3_235b_a22b": {
+      "key": "qwen3_235b_a22b",
+      "label": "Qwen3-235B-A22B-FP8",
+      "attention": "dense",
+      "layers": 94,
+      "moe_layers": 94,
+      "hidden": 4096,
+      "n_heads": 64,
+      "kv_heads": 4,
+      "head_dim": 128,
+      "dense_kv_bytes_per_token": 2048,
+      "sparse_topk": 0,
+      "selected_vector_bytes": 2048,
+      "num_experts": 256,
+      "moe_topk": 8,
+      "expert_intermediate": 1536,
+      "representative_layer": "23"
+    },
+    "llama4_maverick": {
+      "key": "llama4_maverick",
+      "label": "Llama-4-Maverick-17B-128E-Instruct",
+      "attention": "dense",
+      "layers": 48,
+      "moe_layers": 24,
+      "hidden": 5120,
+      "n_heads": 40,
+      "kv_heads": 8,
+      "head_dim": 128,
+      "dense_kv_bytes_per_token": 4096,
+      "sparse_topk": 0,
+      "selected_vector_bytes": 4096,
+      "num_experts": 128,
+      "moe_topk": 1,
+      "expert_intermediate": 8192,
+      "representative_layer": "23"
+    }
+  },
+  "baselines": {
+    "dgx": {
+      "key": "dgx",
+      "label": "vLLM+DGX",
+      "platform": "gpu",
+      "network": "dgx_h200_32x8",
+      "note": "TP2 runtime trace replay on DGX/H200 effective scale-out fabric."
+    },
+    "nvl72": {
+      "key": "nvl72",
+      "label": "vLLM+NVL72",
+      "platform": "gpu",
+      "network": "nvl72_4x64",
+      "note": "TP2 runtime trace replay on NVL72-like effective fabric."
+    },
+    "ls_vllm": {
+      "key": "ls_vllm",
+      "label": "vLLM+LS",
+      "platform": "ls",
+      "network": "ls_16w4x4",
+      "note": "TP2 vLLM row on Layered Supernode."
+    },
+    "moentwine": {
+      "key": "moentwine",
+      "label": "MoEntwine",
+      "platform": "ls",
+      "network": "ls_16w4x4",
+      "note": "TP2 moentwine_static row; attention remains naive."
+    },
+    "waferllm": {
+      "key": "waferllm",
+      "label": "WaferLLM",
+      "platform": "ls",
+      "network": "ls_16w4x4",
+      "note": "vLLM MoE placement/communication plus HACMO-side WaferLLM matrix model."
+    },
+    "hacmo": {
+      "key": "hacmo",
+      "label": "HACMO",
+      "platform": "ls",
+      "network": "ls_16w4x4",
+      "note": "TP1 + TP2 dynamic mapping + TP3 lane-level crossbar allocation."
+    }
+  },
+  "packs": {
+    "deepseek_v32": {
+      "tp2_dir": "<HACMO_REPO>/hacmo/Ablation2_new/outputs/tp2_serving_epoch_paper_pack_20260613",
+      "tp3_dir": "<HACMO_REPO>/hacmo/Ablation3/outputs/tp3_lane_level_multibatch_final_candidate_20260614",
+      "topology_labels": {
+        "ls_16w4x4": "16w_4x4_rail_500",
+        "ls_4w8x8": "4w_8x8_rail_900"
+      },
+      "scope_note": "DeepSeek-R1-AWQ layer-23 HF trace pack, used as DeepSeek-style MoE evidence."
+    },
+    "qwen3_235b_a22b": {
+      "tp2_dir": "<HACMO_REPO>/hacmo/Ablation2_new/outputs/tp2_overall_qwen3_layer23_epoch_t_base_railfix_astra_16w_bpd32_20260617",
+      "tp3_dir": "<HACMO_REPO>/hacmo/Ablation3/outputs/tp3_overall_qwen3_layer23_epoch_t_base_railfix_final_16w_bpd32_20260617",
+      "topology_labels": {
+        "ls_16w4x4": "16w_4x4_rail_500"
+      },
+      "scope_note": "Qwen3 livecodebench representative layer-23 serving epoch: epoch_t telemetry base plus mmlu/mmlu_ZH_CN static library, held-out epoch_t1 eval; ASTRA replay uses model-specific 256 experts/topk/hidden_size and TP3 lane-level pack regenerated from this single-layer TP2 evidence."
+    },
+    "llama4_maverick": {
+      "tp2_dir": "<HACMO_REPO>/hacmo/Ablation2_new/outputs/tp2_overall_llama4_fulltrace_analytical_16w_bpd32_20260617",
+      "tp3_dir": "<HACMO_REPO>/hacmo/Ablation3/outputs/tp3_overall_llama4_fulltrace_final_16w_bpd32_20260617",
+      "topology_labels": {
+        "ls_16w4x4": "16w_4x4_rail_500"
+      },
+      "scope_note": "Llama4 livecodebench full-trace serving epoch: mmlu/mmlu_ZH_CN static library, held-out epoch_t1 eval; ASTRA replay uses model-specific num_experts/topk/hidden_size and TP3 lane-level fulltrace pack."
+    }
+  },
+  "tp1_csv": "<HACMO_REPO>/hacmo/Ablation1/outputs/technical_point1_final_pack_static_traffic_shared_20260612/csv/ablation1_tp1.csv",
+  "semantics": {
+    "primary_metrics": "decode-only TPOT/TPS",
+    "tpot": "full decode-stage service time per output token at stated B/worker",
+    "throughput_tps": "global_batch / TPOT_seconds",
+    "context_tps_panel": "DeepSeek-V3.2 decode TPS normalized vs DGX over context length; not TTFT and not prefill proxy",
+    "representative_moe_layer": "layer 23 TP2/TP3 latency multiplied by model MoE-layer count",
+    "dense_hbm_stream": "dense decode KV, prefill KV, and prefill attention-weight streaming use TP1 dense_hbm_util=0.47; sparse-gather analytic utility remains 0.21 only for legacy sparse paths",
+    "dense_nonuniform_mapping": "HACMO dense decode applies only TP1 static non-uniform mapping hop credit from method S vs B to the KV injection/NoC term; dense HBM service, matrix compute, cache hit-rate, and dynamic prefetch remain unchanged",
+    "waferllm": "HACMO-side waferllm_matrix_model_hacmo_reproduction for MeshGEMV/MeshGEMM matrix stages; vLLM MoE placement and communication retained"
+  },
+  "hbm_streaming": {
+    "dense_hbm_effective_fraction": 0.47,
+    "sparse_hbm_effective_fraction": 0.21,
+    "dense_hbm_source": "TP1 current pack raw/run_meta.json hbm_model.dense_hbm_util",
+    "sparse_hbm_source": "supernode_sim sparse analytic/service-curve fallback for sparse/random selected-KV access"
+  },
+  "dense_nonuniform_mapping": {
+    "enabled_for": "baseline_key=hacmo and model.attention=dense and phase=decode",
+    "base_method": "B",
+    "static_mapping_method": "S",
+    "scale": "kv_injection_us *= min(1, avg_hbm_hops(static_mapping_method)/avg_hbm_hops(base_method))",
+    "not_applied_to": [
+      "kv_hbm_us",
+      "matrix_us",
+      "collective_us",
+      "MoE",
+      "prefill_proxy"
+    ]
+  },
+  "context_tps_panel": {
+    "model": "DeepSeek-V3.2",
+    "phase": "decode",
+    "contexts": [
+      8192,
+      16384,
+      32768,
+      65536
+    ],
+    "batch_per_worker": 32,
+    "normalization": "throughput_tps / vLLM+DGX throughput_tps at the same context",
+    "tp1_main_curve": "<HACMO_REPO>/hacmo/Ablation1/outputs/technical_point1_rebuttal_pipeline/hbm_service_curve/hbm_service_curve.json",
+    "tp1_supplemental_16k_curve": "<HACMO_REPO>/hacmo/overall/outputs/context_tps_tp1_ctx16k_trace_20260617/hbm_service_curve/hbm_service_curve.json",
+    "mapping_profile": "<HACMO_REPO>/hacmo/Ablation1/outputs/technical_point1_rebuttal_pipeline/core_static_mapping_profile.json",
+    "gamma_json": "<HACMO_REPO>/hacmo/Ablation1/outputs_legacy/technical_point1_pipeline/stage1_gamma/gamma_calibration_neighbor.json"
+  }
+}
